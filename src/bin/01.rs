@@ -12,7 +12,17 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let mut elves: Vec<u32> = input
+        .split("\n\n")
+        .map(|elf| {
+            elf.lines()
+                .map(|supply| supply.parse::<u32>().unwrap())
+                .sum()
+        })
+        .collect();
+
+    elves.sort();
+    Some(elves[elves.len() - 3..].iter().sum())
 }
 
 #[cfg(test)]
